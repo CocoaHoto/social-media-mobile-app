@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet,TouchableHighlight, View, Text, Dimensions} from 'react-native';
+import { StyleSheet,TouchableHighlight, View, Text, Dimensions, Image} from 'react-native';
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase"
 
@@ -30,9 +30,10 @@ function HomeScreen({ navigation }) {
                       signOutHandler()
                     }}
                 >
-                        <View style={styles.button}> 
-                            <Text style={styles.buttonText}>Sign out</Text>
-                        </View>
+                    <Image
+                    source={require('../assets/logout.png')}
+                    style={styles.logo}
+                    />
                 </TouchableHighlight>
             </View>
     </View>
@@ -44,15 +45,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 25,
   },
-  button: {
-    backgroundColor: 'blue',
-    height: 50,
-    width: 6*deviceWidth/8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold'
+  logo: {
+    height: 70,
+    width: 70,
   },
 })

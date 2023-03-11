@@ -28,19 +28,19 @@ function SignInScreen({ navigation }) {
         <ScrollView contentContainerStyle={styles.container}>
             <View>
                 <Image
-                    source={require('../assets/rn-social-logo.png')}
+                    source={require('../assets/Logo.png')}
                     style={styles.logo}
                 />
             </View>
 
             <View>
-                <Text style={styles.text}>Social Media App</Text>
+                <Text style={styles.text}>Log in to your account</Text>
             </View >
                     
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
                     <Image
-                        source={require('../assets/icons8-customer-80.png')}
+                        source={require('../assets/email.png')}
                         style={styles.usernameLogo}
                     />
                 </View>
@@ -56,7 +56,7 @@ function SignInScreen({ navigation }) {
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
                     <Image
-                        source={require('../assets/icons8-lock-150.png')}
+                        source={require('../assets/password_locked.png')}
                         style={styles.passwordLogo}
                     />
                 </View>
@@ -97,7 +97,7 @@ function SignInScreen({ navigation }) {
                         navigation.navigate('SignUp')
                     }}
                 >
-                    <Text style={styles.LinkButtonText}>Don't have an account? Create here</Text>
+                    <Text style={styles.LinkButtonText}>Don't have an account?</Text>
                 </TouchableHighlight>
             </View>
         </ScrollView>
@@ -108,10 +108,12 @@ export default SignInScreen;
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        paddingTop: 50
+        paddingTop: 50,
+        backgroundColor: 'white'
     },
     logo: {
         height: 150,
@@ -119,7 +121,8 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     text: {
-        fontSize: 28,
+        fontSize: 24,
+        marginTop: 10,
         marginBottom: 10,
         color: '#051d5f',
     },
@@ -136,14 +139,16 @@ const styles = StyleSheet.create({
         borderColor: 'lightgray',
         justifyContent: 'center',
         alignItems: 'center',
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
     },
     usernameLogo: {
-        height: 30,
-        width: 30,
+        height: 50,
+        width: 50,
     },
     passwordLogo: {
-        height: 30,
-        width: 30,
+        height: 50,
+        width: 50,
     },
     TextInput: {
         margin: 10,
@@ -155,17 +160,20 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'lightgray',
         justifyContent: 'center',
+        borderTopRightRadius: 15, 
+        borderBottomRightRadius: 15,
 
     },
     buttonContainer: {
         marginTop: 25,
     },
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: '#EED03E',
         height: 50,
         width: 6*deviceWidth/8,
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 20,
     },
     buttonText: {
         color: 'white',
@@ -176,7 +184,7 @@ const styles = StyleSheet.create({
     },
     LinkButtonText: {
         fontWeight: 'bold',
-        color: 'blue',
+        color: '#EED03E',
     }
 
     

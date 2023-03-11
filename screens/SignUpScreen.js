@@ -41,6 +41,12 @@ function SignUpScreen({ navigation }) {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
+            <View>
+                <Image
+                    source={require('../assets/Logo.png')}
+                    style={styles.logo}
+                />
+            </View>
         
             <View>
                 <Text style={styles.text}>Create an account</Text>
@@ -49,7 +55,7 @@ function SignUpScreen({ navigation }) {
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
                     <Image
-                        source={require('../assets/icons8-customer-80.png')}
+                        source={require('../assets/email.png')}
                         style={styles.emailLogo}
                     />
                 </View>
@@ -65,7 +71,7 @@ function SignUpScreen({ navigation }) {
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
                     <Image
-                        source={require('../assets/icons8-lock-150.png')}
+                        source={require('../assets/password_unlocked.png')}
                         style={styles.passwordLogo}
                     />
                 </View>
@@ -82,7 +88,7 @@ function SignUpScreen({ navigation }) {
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
                     <Image
-                        source={require('../assets/icons8-lock-150.png')}
+                        source={require('../assets/password_unlocked.png')}
                         style={styles.passwordLogo}
                     />
                 </View>
@@ -126,10 +132,12 @@ export default SignUpScreen;
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        paddingTop: 50
+        paddingTop: 50,
+        backgroundColor: 'white'
     },
     logo: {
         height: 150,
@@ -154,14 +162,16 @@ const styles = StyleSheet.create({
         borderColor: 'lightgray',
         justifyContent: 'center',
         alignItems: 'center',
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
     },
     emailLogo: {
-        height: 30,
-        width: 30,
+        height: 50,
+        width: 50,
     },
     passwordLogo: {
-        height: 30,
-        width: 30,
+        height: 50,
+        width: 50,
     },
     TextInput: {
         margin: 10,
@@ -173,17 +183,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'lightgray',
         justifyContent: 'center',
-
+        borderTopRightRadius: 15, 
+        borderBottomRightRadius: 15,
     },
     buttonContainer: {
         marginTop: 25,
     },
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: '#EED03E',
         height: 50,
         width: 6*deviceWidth/8,
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 20,
     },
     buttonText: {
         color: 'white',
@@ -194,7 +206,7 @@ const styles = StyleSheet.create({
     },
     LinkButtonText: {
         fontWeight: 'bold',
-        color: 'blue',
+        color: '#EED03E',
     }
 
     
