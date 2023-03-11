@@ -9,11 +9,11 @@ let deviceWidth = Dimensions.get('window').width;
 
 
 function SignInScreen({ navigation }) {
-    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
     signInHandler = () => {
-        signInWithEmailAndPassword(auth, username,  password)
+        signInWithEmailAndPassword(auth, email,  password)
                         .then((userCredential) => {
                             navigation.navigate('Home')
                         })
@@ -41,14 +41,14 @@ function SignInScreen({ navigation }) {
                 <View style={styles.LogoContainer}>
                     <Image
                         source={require('../assets/email.png')}
-                        style={styles.usernameLogo}
+                        style={styles.emailLogo}
                     />
                 </View>
                 <View style={styles.TextInputContainer}> 
                     <TextInput style={styles.TextInput}
-                        placeholder="Username"
-                        onChangeText={(username) => setUsername(username)}
-                        value={username}
+                        placeholder="Email"
+                        onChangeText={(email) => setEmail(email)}
+                        value={email}
                     /> 
                 </View>
             </View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15,
     },
-    usernameLogo: {
+    emailLogo: {
         height: 50,
         width: 50,
     },

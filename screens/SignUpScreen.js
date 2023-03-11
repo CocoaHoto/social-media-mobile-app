@@ -1,6 +1,6 @@
 import * as React from 'react';
 import  {useState} from 'react';
-import { View, Text, ScrollView,StyleSheet, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+import { View, Text, ScrollView,StyleSheet, Image, TextInput, Dimensions, TouchableHighlight, Alert } from 'react-native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase"
 
@@ -14,8 +14,9 @@ function SignUpScreen({ navigation }) {
     const [password, setPassword] = useState();
     const [password2, setPassword2] = useState();
 
-    signInHandler = () => {
-        createUserWithEmailAndPassword(auth, this.state.username,  this.state.password)
+    signUpHandler = () => {
+        if(password == password2) {
+            createUserWithEmailAndPassword(auth, email,  password)
                         .then((userCredential) => {
                             signInHandler()
                           })
@@ -24,10 +25,13 @@ function SignUpScreen({ navigation }) {
                           const errorMessage = error.message;
                           // ..
                         });
+        } else {
+            alert('Passwords are not same!')
+        }
     }
 
     signInHandler = () => {
-        signInWithEmailAndPassword(auth, username,  password)
+        signInWithEmailAndPassword(auth, email,  password)
                         .then((userCredential) => {
                             navigation.navigate('Home')
                         })
@@ -96,8 +100,8 @@ function SignUpScreen({ navigation }) {
                     <TextInput style={styles.TextInput}
                         placeholder="Repeat Password"
                         secureTextEntry= {true}
-                        onChangeText={(password) => setPassword(password)}
-                        value={password}
+                        onChangeText={(password2) => setPassword2(password2)}
+                        value={password2}
                     /> 
                 </View>
             </View>
@@ -105,7 +109,7 @@ function SignUpScreen({ navigation }) {
             <View style={styles.buttonContainer}>
                 <TouchableHighlight 
                     onPress={() => { 
-                        navigation.navigate('SignIn')
+                        signUpHandler()
                     }}
                 >
                         <View style={styles.button}> 
