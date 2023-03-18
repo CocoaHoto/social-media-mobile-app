@@ -7,7 +7,7 @@ import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 
 const Stack = createNativeStackNavigator();
-
+// main file 
 function App() {
   return (
     <NavigationContainer>
