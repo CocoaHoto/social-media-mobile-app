@@ -35,7 +35,7 @@ function SignInScreen({ navigation }) {
 
             <View>
                 <Text style={styles.text}>Log in to your account</Text>
-            </View >
+            </View>
                     
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginTop: 10,
         marginBottom: 10,
-        color: '#051d5f',
+        color: '#9933FF',
     },
     LogoTextInputContainer: {
         flexDirection: 'row',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
     },
     button: {
-        backgroundColor: '#EED03E',
+        backgroundColor: '#9933FF',
         height: 50,
         width: 6*deviceWidth/8,
         justifyContent: 'center',
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     },
     LinkButtonText: {
         fontWeight: 'bold',
-        color: '#EED03E',
+        color: '#9933FF',
     }
 
     

@@ -33,7 +33,7 @@ function SignUpScreen({ navigation }) {
     signInHandler = () => {
         signInWithEmailAndPassword(auth, email,  password)
                         .then((userCredential) => {
-                            navigation.navigate('Home')
+                            navigation.navigate('Login')
                         })
                         .catch((error) => {
                           const errorCode = error.code;
@@ -54,7 +54,7 @@ function SignUpScreen({ navigation }) {
         
             <View>
                 <Text style={styles.text}>Create an account</Text>
-            </View >
+            </View>
                     
             <View style={styles.LogoTextInputContainer}>
                 <View style={styles.LogoContainer}>
@@ -122,7 +122,7 @@ function SignUpScreen({ navigation }) {
             <View style={styles.LinkButton}> 
                 <TouchableHighlight
                     onPress={() => { 
-                        navigation.navigate('SignIn')
+                        navigation.navigate('Login')
                     }}
                 >
                     <Text style={styles.LinkButtonText}>Have an account? Sign in</Text>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 28,
         marginBottom: 10,
-        color: '#051d5f',
+        color: '#9933FF',
     },
     LogoTextInputContainer: {
         flexDirection: 'row',
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
     },
     button: {
-        backgroundColor: '#EED03E',
+        backgroundColor: '#9933FF',
         height: 50,
         width: 6*deviceWidth/8,
         justifyContent: 'center',
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     },
     LinkButtonText: {
         fontWeight: 'bold',
-        color: '#EED03E',
+        color: '#9933FF',
     }
 
     
