@@ -36,6 +36,15 @@ function HomeScreen({ navigation }) {
                     />
                 </TouchableHighlight>
             </View>
+            <View style={styles.buttonContainer}>
+                <TouchableHighlight style={styles.userBtn}
+                    onPress={() => {
+                        navigation.navigate('Profile')
+                    }}
+                >
+                    <Text style={styles.userBtnTxt}>Profile</Text>
+                </TouchableHighlight>
+            </View>
     </View>
   );
 }
@@ -48,5 +57,18 @@ const styles = StyleSheet.create({
   logo: {
     height: 70,
     width: 70,
+  },
+  userBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#9933FF',
+    borderWidth: 2,
+    borderRadius: 3,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 5,
+  },
+  userBtnTxt: {
+    color: '#9933FF',
   },
 })
