@@ -72,8 +72,8 @@ const App = () => {
     <NavigationContainer>
       {/* Stack navigator for app login, sign up and home screens */}
       <NavigationStack.Navigator initialRouteName="Login">
-        <NavigationStack.Screen name="Login" component={SignInScreen} />
-        <NavigationStack.Screen name="SignUp" component={SignUpScreen} />
+        <NavigationStack.Screen options = {{headerShown: false}} name="Login" component={SignInScreen} />
+        <NavigationStack.Screen options = {{headerShown: false}} name="SignUp" component={SignUpScreen} />
         <NavigationStack.Screen
           name="Home"
           component={TabStack}
