@@ -1,111 +1,133 @@
+
+// Import necessary components from React and React Native libraries
 import * as React from 'react';
 import  {useState} from 'react';
 import { View, Text, ScrollView,StyleSheet, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+
+// Import Firebase auth library and our firebase config file
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase"
 
+// Get device height and width for styling purposes
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
-
+// Define function component called SignInScreen that takes in navigation props
 function SignInScreen({ navigation }) {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
 
-    signInHandler = () => {
-        signInWithEmailAndPassword(auth, email,  password)
-                        .then((userCredential) => {
-                            navigation.navigate('Home')
-                        })
-                        .catch((error) => {
-                          const errorCode = error.code;
-                          const errorMessage = error.message;
-                          alert('Error: '+ errorMessage)
-                        }); 
-    }
+  // Initialize email and password state variables using useState hook
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View>
-                <Image
-                    source={require('../assets/Logo.png')}
-                    style={styles.logo}
-                />
-            </View>
+  // Define signInHandler function within SignInScreen component
+  signInHandler = () => {
+    // Use Firebase auth library's signInWithEmailAndPassword method to sign in user
+    signInWithEmailAndPassword(auth, email,  password)
+        .then((userCredential) => {
+            // Once user signed in, navigate to Home screen
+            navigation.navigate('Home')
+        })
+        .catch((error) => {
+          // If there's an error, alert user with error message
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert('Error: '+ errorMessage)
+        }); 
+  }
 
-            <View>
-                <Text style={styles.text}>Log in to your account</Text>
-            </View>
-                    
-            <View style={styles.LogoTextInputContainer}>
-                <View style={styles.LogoContainer}>
-                    <Image
-                        source={require('../assets/email.png')}
-                        style={styles.emailLogo}
-                    />
-                </View>
-                <View style={styles.TextInputContainer}> 
-                    <TextInput style={styles.TextInput}
-                        placeholder="Email"
-                        onChangeText={(email) => setEmail(email)}
-                        value={email}
-                    /> 
-                </View>
-            </View>
+  // Return the following JSX code as component's UI
+  return (
+      <ScrollView contentContainerStyle={styles.container}>
+          <View>
+              {/* Display logo on screen */}
+              <Image
+                  source={require('../assets/Logo.png')}
+                  style={styles.logo}
+              />
+          </View>
 
-            <View style={styles.LogoTextInputContainer}>
-                <View style={styles.LogoContainer}>
-                    <Image
-                        source={require('../assets/password_locked.png')}
-                        style={styles.passwordLogo}
-                    />
-                </View>
-                <View style={styles.TextInputContainer}> 
-                    <TextInput style={styles.TextInput}
-                        placeholder="Password"
-                        secureTextEntry= {true}
-                        onChangeText={(password) => setPassword(password)}
-                        value={password}
-                    /> 
-                </View>
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableHighlight 
-                    onPress={() => { 
-                        signInHandler()
-                    }}
-                >
-                        <View style={styles.button}> 
-                            <Text style={styles.buttonText}>Sign In</Text>
-                        </View>
-                </TouchableHighlight>
-            </View>
+          <View>
+              {/* Display text object with 'Log in to your account' text */}
+              <Text style={styles.text}>Log in to your account</Text>
+          </View>
+                  
+          {/* Display email text input and email icon */}
+          <View style={styles.LogoTextInputContainer}>
+              <View style={styles.LogoContainer}>
+                  <Image
+                      source={require('../assets/email.png')}
+                      style={styles.emailLogo}
+                  />
+              </View>
+              <View style={styles.TextInputContainer}> 
+                  <TextInput style={styles.TextInput}
+                      placeholder="Email"
+                      onChangeText={(email) => setEmail(email)}
+                      value={email}
+                  /> 
+              </View>
+          </View>
 
-            <View style={styles.LinkButton}> 
-                <TouchableHighlight
-                    onPress={() => { 
-                        
-                    }}
-                >
-                    <Text style={styles.LinkButtonText}>Forget Password?</Text>
-                </TouchableHighlight>
-            </View>
+          {/* Display password text input and password icon */}
+          <View style={styles.LogoTextInputContainer}>
+              <View style={styles.LogoContainer}>
+                  <Image
+                      source={require('../assets/password_locked.png')}
+                      style={styles.passwordLogo}
+                  />
+              </View>
+              <View style={styles.TextInputContainer}> 
+                  <TextInput style={styles.TextInput}
+                      placeholder="Password"
+                      secureTextEntry= {true}
+                      onChangeText={(password) => setPassword(password)}
+                      value={password}
+                  /> 
+              </View>
+          </View>
 
-            <View style={styles.LinkButton}> 
-                <TouchableHighlight
-                    onPress={() => { 
-                        navigation.navigate('SignUp')
-                    }}
-                >
-                    <Text style={styles.LinkButtonText}>Don't have an account?</Text>
-                </TouchableHighlight>
-            </View>
-        </ScrollView>
-    );
+          {/* Display sign in button */}
+          <View style={styles.buttonContainer}>
+              <TouchableHighlight 
+                  onPress={() => { 
+                      signInHandler()
+                  }}
+              >
+                      <View style={styles.button}> 
+                          <Text style={styles.buttonText}>Sign In</Text>
+                      </View>
+              </TouchableHighlight>
+          </View>
+
+          {/* Display 'Forget Password?' text link */}
+          <View style={styles.LinkButton}> 
+              <TouchableHighlight
+                  onPress={() => { 
+                      
+                  }}
+              >
+                  <Text style={styles.LinkButtonText}>Forget Password?</Text>
+              </TouchableHighlight>
+          </View>
+
+          {/* Display 'Don't have an account?' text link */}
+          <View style={styles.LinkButton}> 
+              <TouchableHighlight
+                  onPress={() => { 
+                      navigation.navigate('SignUp')
+                  }}
+              >
+                  <Text style={styles.LinkButtonText}>Don't have an account?</Text>
+              </TouchableHighlight>
+          </View>
+      </ScrollView>
+  );
 }
 
+// Export SignInScreen component as default
 export default SignInScreen;
 
+// Define component stylesheet as const called styles
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -188,4 +210,4 @@ const styles = StyleSheet.create({
     }
 
     
-  });
+});
