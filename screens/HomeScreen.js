@@ -96,23 +96,7 @@ function HomeScreen({ navigation }) {
           </TouchableOpacity>
 
         </View>
-
-
       </View>
-
-      {/* Logout  */}
-      {/* <View style={styles.buttonContainer}>
-                <TouchableHighlight 
-                    onPress={() => { 
-                      signOutHandler()
-                    }}
-                >
-                    <Image
-                    source={require('../assets/logout.png')}
-                    style={styles.logo}
-                    />
-                </TouchableHighlight>
-    </View>
   );
 }
 export default HomeScreen;
