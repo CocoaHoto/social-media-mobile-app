@@ -112,7 +112,6 @@ function HomeScreen({ navigation }) {
                     style={styles.logo}
                     />
                 </TouchableHighlight>
-      </View> */}
     </View>
   );
 }
@@ -197,10 +196,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 5,
   },
-
-
-
-
   buttonContainer: {
     marginTop: 25,
   },
@@ -208,4 +203,3 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
   },
-});

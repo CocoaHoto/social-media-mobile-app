@@ -95,6 +95,7 @@ const App = () => {
           }}
         />
       </NavigationStack.Navigator>
+      <NavigationStack.Screen options = {{headerShown: false}} name="Profile" component={ProfileScreen} />
     </NavigationContainer>
   )
 };
