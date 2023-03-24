@@ -97,6 +97,7 @@ function HomeScreen({ navigation }) {
 
         </View>
       </View>
+  </View>
   );
 }
 export default HomeScreen;
