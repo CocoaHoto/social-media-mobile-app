@@ -13,6 +13,7 @@ import SignUpScreen from './screens/SignUpScreen';
 import PostScreen from "./screens/PostScreen";
 import MessageScreen from "./screens/MessageScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import EditProfileScreen from './screens/EditProfileScreen';
 
 // Create stack navigators for App, Tabs, and Navigation Stack.
 const Stack = createNativeStackNavigator();
@@ -59,6 +60,7 @@ const TabStack = () => {
       <Tab.Screen name={"Post"} component={PostScreen} />
       <Tab.Screen name={"Profile"} component={ProfileScreen} />
 
+
       {/* Add more tabs here if needed */}
     </Tab.Navigator>
   );
@@ -73,6 +75,7 @@ const App = () => {
       {/* Stack navigator for app login, sign up and home screens */}
       <NavigationStack.Navigator initialRouteName="Login">
         <NavigationStack.Screen options = {{headerShown: false}} name="Login" component={SignInScreen} />
+        <NavigationStack.Screen options = {{headerShown: false}} name="EditProfile" component={EditProfileScreen} />
         <NavigationStack.Screen options = {{headerShown: false}} name="SignUp" component={SignUpScreen} />
         <NavigationStack.Screen
           name="Home"
@@ -96,6 +99,7 @@ const App = () => {
         />
       </NavigationStack.Navigator>
       <NavigationStack.Screen options = {{headerShown: false}} name="Profile" component={ProfileScreen} />
+
     </NavigationContainer>
   )
 };

@@ -1,22 +1,57 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { signOut, onAuthStateChanged  } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
+
 function ProfileScreen({ navigation }) {
+
+    const [userData, setUserData] = useState();
+    const [uid, setUID] = useState();
+
+    async function getData() {
+        getUID();
+
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            setUserData(docSnap.data());
+            console.log("Document data:", docSnap.data());
+        } else {
+        // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+    }
+    };
+
+    async function getUID() {
+        setUID(auth.currentUser.uid);
+        console.log(uid);
+    };
+
+
+    useEffect(() => {
+        getUID();
+        getData();
+    });
+
     signOutHandler = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            navigation.navigate('SignIn')
         }).catch((error) => {
             // An error happened.
             const errorCode = error.code;
             const errorMessage = error.message;
             alert('Error: ' + errorMessage)
+        }).finally(() => {
+            navigation.navigate('Login')
         });
+        
+
     }
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -28,30 +63,31 @@ function ProfileScreen({ navigation }) {
             </View>
 
             <View>
-                <Text style={styles.text}>Swathi Shanmugasundaram</Text>
+                <Text style={styles.text}>{userData && userData.firstName} {userData && userData.lastName}</Text>
             </View >
 
             <Text style={styles.aboutUser}>
-                Life is wonderful.
+                {userData && userData.status}
             </Text>
 
             <View style={styles.userInfoItem}>
-                <TouchableOpacity style={styles.userBtn} onPress={() => { }}>
+                <TouchableOpacity style={styles.userBtn} onPress={() => { navigation.navigate('EditProfile') }}>
                     <Text style={styles.userBtnTxt}>Edit Profile</Text>
                 </TouchableOpacity>
             </View>
+            
 
             <View style={styles.userInfoWrapper}>
                 <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>30</Text>
+                    <Text style={styles.userInfoTitle}>{userData && userData.posts}</Text>
                     <Text style={styles.userInfoSubTitle}>Posts</Text>
                 </View>
                 <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>50</Text>
+                    <Text style={styles.userInfoTitle}>{userData && userData.followers}</Text>
                     <Text style={styles.userInfoSubTitle}>Followers</Text>
                 </View>
                 <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>100</Text>
+                    <Text style={styles.userInfoTitle}>{userData && userData.following}</Text>
                     <Text style={styles.userInfoSubTitle}>Following</Text>
                 </View>
             </View>
@@ -59,29 +95,17 @@ function ProfileScreen({ navigation }) {
             <View>
                 <View style={styles.userInfoItem}>
                     <Text style={styles.userInfoTitle}>Bio</Text>
-                    <Text style={styles.userInfoSubTitle}>Describe Yourself</Text>
+                    <Text style={styles.userInfoSubTitle}>{userData && userData.bio}</Text>
                 </View>
                 <View style={styles.userInfoItem}>
                     <Text style={styles.userInfoTitle}>Details</Text>
-                    <Text style={styles.userInfoSubTitle}>From</Text>
-                    <Text style={styles.userInfoSubTitle}>Current City</Text>
-                    <Text style={styles.userInfoSubTitle}>Workplace</Text>
-                    <Text style={styles.userInfoSubTitle}>Education</Text>
-                    <Text style={styles.userInfoSubTitle}>Relationship status</Text>
+                    <Text style={styles.userInfoSubTitle}>{userData && userData.currentCity}</Text>
+                    <Text style={styles.userInfoSubTitle}>{userData && userData.education}</Text>
                 </View>
                 <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>Friends</Text>
-                    <Text style={styles.userInfoSubTitle}>...........</Text>
-                </View>
-                <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>What's on your mind?</Text>
-                    <TouchableOpacity style={styles.userBtn} onPress={() => { }}>
-                        <Text style={styles.userBtnTxt}>Create your post here</Text>
+                    <TouchableOpacity style={styles.userBtn} onPress={() => { signOutHandler() }}>
+                        <Text style={styles.userBtnTxt}>Logout</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>My Posts</Text>
-                    <Text style={styles.userInfoSubTitle}>............</Text>
                 </View>
             </View>
         </ScrollView>
