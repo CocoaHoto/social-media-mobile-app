@@ -63,19 +63,13 @@ function ProfileScreen({ navigation }) {
             </View>
 
             <View>
-                <Text style={styles.text}>{userData && userData.firstName} {userData && userData.lastName}</Text>
+                <Text style={styles.textUserName}>{userData && userData.firstName} {userData && userData.lastName}</Text>
             </View >
 
             <Text style={styles.aboutUser}>
                 {userData && userData.status}
             </Text>
-
-            <View style={styles.userInfoItem}>
-                <TouchableOpacity style={styles.userBtn} onPress={() => { navigation.navigate('EditProfile') }}>
-                    <Text style={styles.userBtnTxt}>Edit Profile</Text>
-                </TouchableOpacity>
-            </View>
-            
+        
 
             <View style={styles.userInfoWrapper}>
                 <View style={styles.userInfoItem}>
@@ -94,20 +88,26 @@ function ProfileScreen({ navigation }) {
 
             <View>
                 <View style={styles.userInfoItem}>
-                    <Text style={styles.userInfoTitle}>Bio</Text>
-                    <Text style={styles.userInfoSubTitle}>{userData && userData.bio}</Text>
+                    <Text style={styles.userInfoTitle}>Biography</Text>
+                    <Text style={styles.text}>{userData && userData.bio}</Text>
                 </View>
                 <View style={styles.userInfoItem}>
                     <Text style={styles.userInfoTitle}>Details</Text>
-                    <Text style={styles.userInfoSubTitle}>{userData && userData.currentCity}</Text>
-                    <Text style={styles.userInfoSubTitle}>{userData && userData.education}</Text>
+                    <Text style={styles.text}>City:                 {userData && userData.currentCity}</Text>
+                    <Text style={styles.text}>Education:       {userData && userData.education}</Text>
                 </View>
                 <View style={styles.userInfoItem}>
-                    <TouchableOpacity style={styles.userBtn} onPress={() => { signOutHandler() }}>
-                        <Text style={styles.userBtnTxt}>Logout</Text>
+                    <TouchableOpacity style={styles.userBtnEdit} onPress={() => { navigation.navigate('EditProfile') }}>
+                        <Text style={styles.userBtnTxt}>Edit Profile</Text>
+                    </TouchableOpacity>
+                 </View>
+                <View style={styles.userInfoItem}>
+                    <TouchableOpacity style={styles.userBtnLogout} onPress={() => { signOutHandler() }}>
+                        <Text style={styles.userBtnTxtLogout}>Logout</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+
         </ScrollView>
     );
 
@@ -125,16 +125,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     logo: {
-        height: 150,
-        width: 150,
+        height: 100,
+        width: 100,
         resizeMode: 'cover',
     },
     buttonContainer: {
         marginTop: 25,
     },
-    logo: {
-        height: 70,
-        width: 70,
+    text: {
+        textAlign: 'justify'
+    },
+
+    textUserName: {
+        textAlign: 'justify',
+        fontSize: 22
     },
 
     userImg: {
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 10,
     },
-    userBtn: {
+    userBtnEdit: {
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#9933FF',
@@ -169,9 +173,23 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         marginHorizontal: 5,
+        margin: 15,
+    },
+    userBtnLogout: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'red',
+        borderWidth: 2,
+        borderRadius: 3,
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        marginHorizontal: 5,
     },
     userBtnTxt: {
         color: '#9933FF',
+    },
+    userBtnTxtLogout: {
+        color: 'red',
     },
     userInfoWrapper: {
         flexDirection: 'row',
