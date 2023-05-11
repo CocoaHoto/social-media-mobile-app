@@ -86,13 +86,15 @@ function EditProfileScreen({ navigation }) {
             </View>
 
             <View>
-                <Text style={styles.text}>{userData && userData.firstName} {userData && userData.lastName}</Text>
+                <Text style={styles.textUserName}>{userData && userData.firstName} {userData && userData.lastName}</Text>
             </View >
 
+
             <View style={styles.LogoTextInputContainer}>
+            <Text style={styles.parametherNameText}>Firstname</Text>
               <View style={styles.TextInputContainer}> 
                   <TextInput style={styles.TextInput}
-                      placeholder="Firstname"
+                      placeholder= {userData && userData.firstName}
                       onChangeText={(firstName) => setFirstName(firstName)}
                       value={firstName}
                   /> 
@@ -100,9 +102,10 @@ function EditProfileScreen({ navigation }) {
           </View> 
 
           <View style={styles.LogoTextInputContainer}>
+          <Text style={styles.parametherNameText}>Lastname</Text>
               <View style={styles.TextInputContainer}> 
                   <TextInput style={styles.TextInput}
-                      placeholder="Lastname"
+                      placeholder={userData && userData.lastName}
                       onChangeText={(lastName) => setLastName(lastName)}
                       value={lastName}
                   /> 
@@ -110,9 +113,10 @@ function EditProfileScreen({ navigation }) {
           </View> 
 
           <View style={styles.LogoTextInputContainer}>
+          <Text style={styles.parametherNameText}>Status</Text>
               <View style={styles.TextInputContainer}> 
                   <TextInput style={styles.TextInput}
-                      placeholder="Status"
+                      placeholder={userData && userData.status}
                       onChangeText={(status) => setStatus(status)}
                       value={status}
                   /> 
@@ -120,9 +124,11 @@ function EditProfileScreen({ navigation }) {
           </View> 
 
           <View style={styles.LogoTextInputContainer}>
+          <Text style={styles.parametherNameText}>Biography</Text>
+
               <View style={styles.TextInputContainer}> 
                   <TextInput style={styles.TextInput}
-                      placeholder="Bio"
+                      placeholder={userData && userData.bio}
                       onChangeText={(bio) => setBio(bio)}
                       value={bio}
                   /> 
@@ -130,9 +136,10 @@ function EditProfileScreen({ navigation }) {
           </View> 
 
           <View style={styles.LogoTextInputContainer}>
+          <Text style={styles.parametherNameText}>City</Text>
               <View style={styles.TextInputContainer}> 
                   <TextInput style={styles.TextInput}
-                      placeholder="City"
+                      placeholder={userData && userData.currentCity}
                       onChangeText={(city) => setCity(city)}
                       value={city}
                   /> 
@@ -140,9 +147,10 @@ function EditProfileScreen({ navigation }) {
           </View> 
 
           <View style={styles.LogoTextInputContainer}>
+          <Text style={styles.parametherNameText}>Education</Text>
               <View style={styles.TextInputContainer}> 
                   <TextInput style={styles.TextInput}
-                      placeholder="Education"
+                      placeholder={userData && userData.education}
                       onChangeText={(education) => setEducation(education)}
                       value={education}
                   /> 
@@ -150,7 +158,7 @@ function EditProfileScreen({ navigation }) {
           </View> 
 
             <View>
-                <View style={styles.userInfoItem}>
+                <View style={styles.userButtonView}>
                 <TouchableOpacity style={styles.userBtn} onPress={() => { setData() }}>
                     <Text style={styles.userBtnTxt}>Submit</Text>
                 </TouchableOpacity>
@@ -173,8 +181,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     logo: {
-        height: 150,
-        width: 150,
+        height: 100,
+        width: 100,
         resizeMode: 'cover',
     },
     buttonContainer: {
@@ -217,6 +225,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         marginHorizontal: 5,
+        margin: 20,
     },
     userBtnTxt: {
         color: '#9933FF',
@@ -230,6 +239,10 @@ const styles = StyleSheet.create({
     userInfoItem: {
         justifyContent: 'center',
     },
+    userButtonView: {
+        width: 8*deviceWidth/10,
+        margin: 10
+    }, 
     userInfoTitle: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -242,16 +255,24 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     text: {
-        fontSize: 24,
-        marginTop: 10,
-        marginBottom: 10,
-        color: '#9933FF',
+        textAlign: 'justify'
     },
+
+    textUserName: {
+        textAlign: 'justify',
+        fontSize: 22
+    },
+
+    parametherNameText: {
+        fontSize: 16,
+        margin: 2,
+        marginLeft: 5,
+        fontWeight: 'bold'
+    },
+
     LogoTextInputContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
+        flexDirection: 'column',
+        marginTop: 8,
     },
  
     TextInput: {
@@ -260,7 +281,7 @@ const styles = StyleSheet.create({
     },
     TextInputContainer: {
         height: 50,
-        width: 5*deviceWidth/8,
+        width: 8*deviceWidth/10,
         borderWidth: 1,
         borderColor: 'lightgray',
         justifyContent: 'center',
