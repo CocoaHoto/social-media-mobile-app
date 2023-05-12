@@ -22,7 +22,7 @@ let deviceWidth = Dimensions.get("window").width;
 
 const PostScreen = ({ navigation }) => {
   const [image, setImage] = useState(null);
-  const [uid, setUID] = useState();
+  const [uid, setUID] = useState("12345667");
   const [post, setPost] = useState(null);
 
   const takePhotoFromCamera = async () => {
@@ -30,7 +30,6 @@ const PostScreen = ({ navigation }) => {
       allowsEditing: true,
       quality: 1,
     });
-    console.log(imageResult);
     if (!imageResult.canceled) {
       console.log(imageResult);
       setImage(imageResult.assets[0].uri);
@@ -44,17 +43,18 @@ const PostScreen = ({ navigation }) => {
     console.log("Image Url: ", image);
     console.log("Post: ", post);
 
-    getUID();
+    //getUID();
     const postRef = await addDoc(collection(db, "posts"), {
       userId: uid,
       post: post,
-      postImg: "fghjkgfhjk",
+      postImg: "Image URL",
       postTime: Timestamp.fromDate(new Date()),
       likes: null,
       comments: null,
     });
     console.log("Document written with ID: ", postRef.id);
     setImage(null);
+    setPost(null);
     navigation.navigate("Home");
   };
   
