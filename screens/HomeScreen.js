@@ -1,17 +1,13 @@
+// Import required modules from react-native and styled-components
 import * as React from 'react';
-import { AppRegistry, StyleSheet,TouchableHighlight, View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
+import { View, Text, FlatList} from 'react-native';
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase"
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import styled from 'styled-components';
 
-let deviceHeight = Dimensions.get('window').height;
-let deviceWidth = Dimensions.get('window').width;
-
-onPressLike = () =>{
-  
-}
-
+// Import PostCard component
+import PostCard from '../components/PostCard';
 
 function HomeScreen({ navigation }) {
   signOutHandler = () => {
@@ -25,167 +21,98 @@ function HomeScreen({ navigation }) {
       alert('Error: '+ errorMessage)
     });
   }
+
+  // Create an array of posts
+  const Posts = [
+    {
+      id: '1',
+      userName: 'Jenny Doe',
+      userImg: require('../assets/users/user-3.jpg'),
+      postTime: '4 mins ago',
+      post:
+        'Hey there, this is my test for a post of my social app in React Native.',
+      postImg: require('../assets/posts/post-img-3.jpg'),
+      liked: true,
+      likes: '14',
+      comments: '5',
+    },
+    {
+      id: '2',
+      userName: 'John Doe',
+      userImg: require('../assets/users/user-1.jpg'),
+      postTime: '2 hours ago',
+      post:
+        'Hey there, this is my test for a post of my social app in React Native.',
+      postImg: 'none',
+      liked: false,
+      likes: '8',
+      comments: '0',
+    },
+    {
+      id: '3',
+      userName: 'Ken William',
+      userImg: require('../assets/users/user-4.jpg'),
+      postTime: '1 hours ago',
+      post:
+        'Hey there, this is my test for a post of my social app in React Native.',
+      postImg: require('../assets/posts/post-img-2.jpg'),
+      liked: true,
+      likes: '1',
+      comments: '0',
+    },
+    {
+      id: '4',
+      userName: 'Selina Paul',
+      userImg: require('../assets/users/user-6.jpg'),
+      postTime: '1 day ago',
+      post:
+        'Hey there, this is my test for a post of my social app in React Native.',
+      postImg: require('../assets/posts/post-img-4.jpg'),
+      liked: true,
+      likes: '22',
+      comments: '4',
+    },
+    {
+      id: '5',
+      userName: 'Christy Alex',
+      userImg: require('../assets/users/user-7.jpg'),
+      postTime: '2 days ago',
+      post:
+        'Hey there, this is my test for a post of my social app in React Native.',
+      postImg: 'none',
+      liked: false,
+      likes: '0',
+      comments: '0',
+    },
+  ];
+
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <View style={styles.userInfo}>
-          
-          <Image 
-            source={require('../assets/users/user-3.jpg')}
-            style={styles.uerImage}           
-          />
-          <View style={styles.userInfoText}>
-            <Text style={styles.userName}>Jenny Doe</Text>
-            <Text style={styles.postTime}>4 hours ago</Text>
-          </View>
-          
-
-        </View>
-        <Text style={styles.postText}>Hello this is a test post</Text>
-
-        <Image 
-            source={require('../assets/posts/post-img-2.jpg')}
-            style={styles.postImg}           
-        />
-
-        <View style={styles.interactionWrapper}>
-          <TouchableOpacity style={styles.interaction}>
-            <Ionicons name="heart-outline" size={25} />
-            <Text style={styles.interactionText}>Like</Text>
-
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.interaction}>
-            <Ionicons name="md-chatbubble-outline" size={25} />
-            <Text style={styles.interactionText}>Comment</Text>
-
-          </TouchableOpacity>
-
-        </View>
-
-
-      </View>
-
-      <View style={styles.card}>
-        <View style={styles.userInfo}>
-          
-          <Image 
-            source={require('../assets/users/user-1.jpg')}
-            style={styles.uerImage}           
-          />
-          <View style={styles.userInfoText}>
-            <Text style={styles.userName}>Kevin Hart</Text>
-            <Text style={styles.postTime}>4 hours ago</Text>
-          </View>
-          
-
-        </View>
-        <Text style={styles.postText}>Hello this is a test post</Text>
-
-        <View style={styles.divider}></View>
-
-        <View style={styles.interactionWrapper}>
-          <TouchableOpacity style={styles.interaction} onPress={this.onPressLike}>
-            <Ionicons name="heart-outline" size={25} />
-            <Text style={styles.interactionText}>Like</Text>
-
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.interaction}>
-            <Ionicons name="md-chatbubble-outline" size={25} />
-            <Text style={styles.interactionText}>Comment</Text>
-
-          </TouchableOpacity>
-
-        </View>
-      </View>
-  </View>
+    <Container>
+      <FlatList
+            data={Posts}
+            renderItem={({item}) => (
+              <PostCard
+                item={item}
+                // onDelete={handleDelete}
+                // onPress={() =>
+                //   navigation.navigate('HomeProfile', {userId: item.userId})
+                // }
+              />
+            )}
+            keyExtractor={(item) => item.id}
+            // ListHeaderComponent={ListHeader}
+            // ListFooterComponent={ListHeader}
+            showsVerticalScrollIndicator={false}
+      />
+    </Container>
   );
+
 }
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    alignItems: 'center', 
-    marginTop: 100,
-    // justifyContent: 'center',
-    backgroundColor: '#fff', 
-    padding: 20
-  },
-  card: {
-    backgroundColor: '#f8f8f8', 
-    width: deviceWidth-35,
-    marginBottom: 20,
-    borderRadius: 10,
-  },
-  userInfo: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    padding: 15,
-  },
-  uerImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  userName: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    fontFamily: 'Arial',
-  },
-  userInfoText: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: 10,
-  },
-  postTime: {
-    fontSize: 12,
-    fontFamily: 'Arial',
-    color: '#666',
-  },
-  postText: {
-    fontSize: 14,
-    fontFamily: 'Arial',
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom: 15,
-  },
-  postImg: {
-    width: deviceWidth-35,
-    height: 250,
-  },
-  divider: {
-    borderBottomColor: '#dddddd',
-    borderBottomWidth: 1,
-    width: deviceWidth-35,
-    alignSelf: 'center',
-    marginTop: 15,
-  },
-  interactionWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 15,
-  },
-  interaction: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderRadius: 5,
-    padding: 5,
-    // backgroundColor: ${props => props.active ? '#2e64e515' : 'transparent'},
-  },
-  interactionText: {
-    fontSize: 12,
-    fontFamily: 'Arial',
-    fontWeight: 'bold',
-    // color: ${props => props.active ? '#2e64e5' : '#333'};
-    color: '#333',
-    marginTop: 5,
-    marginLeft: 5,
-  },
-  buttonContainer: {
-    marginTop: 25,
-  },
-  logo: {
-    height: 70,
-    width: 70,
-  },
-});
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+`;
