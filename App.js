@@ -84,7 +84,7 @@ const App = () => {
           component={TabStack}
           options={{
             headerTitleAlign: "center",
-            title: "Social Media",
+            title: "BuzzFeed",
             // Set header text color, size, and margin.
             headerTitleStyle: {
               color: "#9933FF",
